@@ -10,7 +10,7 @@ const secondi = document.getElementById("seconds")
 
 
 
-setInterval(quantoManca , 1000);
+const intervallo = setInterval(quantoManca , 1000);
 
 function quantoManca (){
     //mi prendi l'ora attuale 
@@ -24,29 +24,30 @@ function quantoManca (){
 
     //calcolo la loro differenza così da avere quanti millisecondi mancano a natale
     let tempoEffettivo = natale - currentDay;
+    
+
     console.log(`tempo effettivo ${tempoEffettivo}`);
 
-    //creo una funzione che mi calcoli i giorni, ore minuti e secondi dandole in input i millisecondi
     
-    let dati = trasformatore(tempoEffettivo);
-    giorno.innerHTML = dati[0];
-    ora.innerHTML = dati[1];
-    minuti.innerHTML = dati[2];
-    secondi.innerHTML = dati[3];
 
-
-
-
-
-
-
-    console.log(currentDay)
+    if(natale <= currentDay){
+        let dati = trasformatore(tempoEffettivo);
+        giorno.innerHTML = dati[0];
+        ora.innerHTML = dati[1];
+        minuti.innerHTML = dati[2];
+        secondi.innerHTML = dati[3];
+        
+    }else{
+        clearInterval(intervallo)
+    }
+    
 }
 
 let oggi = new Date();
 oggi = oggi.getTime();
 trasformatore(oggi);
 
+//creo una funzione che mi calcoli i giorni, ore minuti e secondi dandole in input i millisecondi
 
 function trasformatore (x){
     //preparo una array per immagazzinare i valori di rispettivamente giorni ore minuti e secondi
